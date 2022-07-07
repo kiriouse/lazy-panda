@@ -1,0 +1,92 @@
+.group {
+  text-align: left;
+}
+
+.exit {
+  cursor: pointer;
+  font-size: 18px;
+  font-family: Helvetica, sans-serif;
+}
+
+.top {
+  margin-top: -20px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.play {
+  position: fixed;
+  top: 70%;
+  left: 20px;
+  padding: 0 0 20px 20px;
+  cursor: pointer;
+  background-color: #ffffff;
+  opacity: 0.6;
+}
+
+.play-text {
+  font-family: Helvetica, sans-serif;
+  font-weight: lighter;
+  color: black;
+  font-size: 40px;
+}
+
+ion-content {
+  --ion-background-color: #ffffff;
+  --overflow: hidden
+}
+
+ion-footer, ion-toolbar, ion-row, ion-col {
+  --ion-background-color: orange;
+}
+
+#container {
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: #525252;
+  padding: 30px 20px;
+  font-size: 30px;
+  line-height: 26px;
+  height: auto;
+}
+
+.group-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.mainIcon {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  border: 1px solid #a1897a;
+}
+
+.in-construction {
+  pointer-events: none;
+  color: #cdcdcd;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 6px 0 3px 0;
+}
+
+#container li, p {
+  font-size: 18px;
+  color: #5c5c5c;
+  margin-bottom: 10px;
+  font-family: sans-serif;
+}
+
+#container a {
+  text-decoration: none;
+}

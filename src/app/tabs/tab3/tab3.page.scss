@@ -1,0 +1,71 @@
+#container {
+  font-family: "Helvetica", sans-serif;
+  text-align: center;
+  height: 100%;
+  color: #525252;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //margin-top: -30px;
+}
+
+app-icon {
+  margin: 4px;
+  width: 100%;
+}
+
+.row {
+  width: 92%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px 0;
+  margin: 5px 0;
+}
+
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+  .row {
+    padding: 20px 0;
+    margin: 100px 0;
+  }
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-weight: bolder;
+  background-color: orange;
+  margin-left: 80px;
+  margin-bottom: -20px;
+}
+
+
+.circle {
+  width: 130px;
+  height: 130px;
+  border: 0.5px solid orange;
+  border-radius: 100%;
+  margin-bottom: -135px;
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+}
+
+
+#container p {
+  font-size: 16px;
+  color: #8c8c8c;
+}
+
+#container a {
+  text-decoration: none;
+}
+

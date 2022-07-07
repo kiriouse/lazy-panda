@@ -1,0 +1,30 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.one {
+  background: #efefef center no-repeat url(../../../../assets/first.svg);
+  background-size: 20%;
+}
+
+.two {
+  background: #efefef center no-repeat url(../../../../assets/second.svg);
+  background-size: 20%;
+}
+
+.three {
+  background: #efefef center no-repeat url(../../../../assets/third.svg);
+  background-size: 20%;
+}

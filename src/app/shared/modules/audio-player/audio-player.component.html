@@ -1,0 +1,13 @@
+<ion-content [fullscreen]="true">
+  <app-top></app-top>
+  <div class="top"><a class="exit" (click)="goBack()"><< Вернуться</a></div>
+
+  <div class="play">
+    <p class="play-text">{{title}}</p>
+
+  </div>
+
+
+  <iframe width="100%" height="100%" allow="autoplay"
+          [src]='src | safe'></iframe>
+</ion-content>

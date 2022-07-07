@@ -1,1 +1,35 @@
+@font-face {
+  font-family: "ChinaCyr";
+  src: url("../../assets/fonts/chinacyr.ttf");
+}
 
+ion-tab-bar {
+  height: 60px;
+  background-color: #f8f8f8;
+  background-size: 80%;
+}
+
+ion-tab-button {
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20%;
+
+  &::before {
+    background-color: transparent;
+    display: block;
+    content: "";
+    margin: 0 auto;
+    width: 20px;
+    height: 3px;
+  }
+
+  &.tab-selected::before {
+    background-color: var(--ion-color-primary);
+  }
+}
+
+ion-tab-button > ion-label {
+  font-size: 18px !important;
+  font-family: "Ninja", sans-serif;
+}

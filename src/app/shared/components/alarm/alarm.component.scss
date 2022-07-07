@@ -1,0 +1,13 @@
+img {
+  position: fixed;
+  top: 10%;
+  right: 0;
+  width: 100px;
+  z-index: 999;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
+  img {
+    top: 15%;
+  }
+}

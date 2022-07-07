@@ -1,0 +1,80 @@
+@font-face {
+  font-family: "LongCangRegular";
+  src: url("../../../assets/fonts/LongCang-Regular.ttf");
+}
+
+.group {
+  text-align: left;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: #525252;
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.authorizationContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.authorizationContainer p a{
+  color: red;
+}
+
+.logoContainer {
+  margin-top: -50px;
+}
+
+.container .logo {
+  font-size: 190px;
+  color: #3d3d3d;
+  font-family: "LongCangRegular", sans-serif;
+  margin: 150px;
+}
+
+.logoSubtitle{
+  padding: 10px 20px 15px 20px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  font-size: 25px;
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+
+
+
+.group-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.mainIcon {
+  width: 250px;
+  height: 250px;
+}
+
+.in-construction{
+  pointer-events: none;
+  color: #cdcdcd;
+}
+
+#container p {
+  font-size: 16px;
+  color: #8c8c8c;
+}
+
+#container a {
+  text-decoration: none;
+}

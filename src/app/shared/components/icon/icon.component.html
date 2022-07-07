@@ -1,0 +1,9 @@
+<div class="container">
+  <div [ngClass]="disabled ? 'badge badge-disabled' : 'badge'">{{level}}</div>
+  <img [ngClass]="disabled ? 'preview preview-disabled' : 'preview'" [src]="src" alt="Хранение одного"/>
+  <div class="titleContainer">
+    <p [ngClass]="disabled ? 'title title-disabled' : 'title'">{{title}}</p>
+    <p [ngClass]="disabled ? 'subtitle subtitle-disabled' : 'subtitle'">{{subTitle}}</p>
+  </div>
+
+</div>

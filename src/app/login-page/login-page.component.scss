@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "ChinaCyr";
+  src: url("../../assets/fonts/chinacyr.ttf");
+}
+
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "ChinaCyr", sans-serif;
+  text-align: center;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: #525252;
+  padding: 30px 20px;
+  font-size: 30px;
+  line-height: 26px;
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 30px;
+}
+
+#container p {
+  font-size: 16px;
+  color: #8c8c8c;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+#container strong {
+  margin-bottom: 50px;
+}
+

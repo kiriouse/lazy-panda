@@ -1,5 +1,7 @@
 {
   "name": "lazy-panda",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

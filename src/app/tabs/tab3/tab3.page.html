@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true">
+  <app-top></app-top>
+  <app-alarm></app-alarm>
+  <div id="container">
+    <div class="row">
+      <app-icon
+        [src]="'../../assets/practice-previews/meditation.png'"
+        routerLink="/audio-player"
+        [level]="1"
+        [disabled]="false"
+        title="Медитация"
+        subTitle="регулярная практика"
+      >
+      </app-icon>
+    </div>
+    <br/>
+    <div class="row">
+      <app-icon [src]="'../../assets/practice-previews/stand.png'" [level]="1" [disabled]="false" title="Столбы"
+                subTitle="регулярная практика"></app-icon>
+    </div>
+    <br/>
+    <div class="row">
+      <app-icon [src]="'../../assets/practice-previews/qigong.png'" [level]="2" [disabled]="false" title="Цигун"
+                subTitle="регулярная практика"></app-icon>
+    </div>
+  </div>
+</ion-content>

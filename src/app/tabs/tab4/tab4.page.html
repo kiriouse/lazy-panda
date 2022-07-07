@@ -1,0 +1,71 @@
+<ion-content [fullscreen]="true">
+  <app-top></app-top>
+  <div id="container">
+    <strong>Справочники</strong>
+    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI
+      Components</a></p>
+    <br>
+    <img class="mainIcon" src="../../../assets/icon/dictionary.png" alt="">
+    <br>
+    <br>
+    <div class="group">
+      <div class="group-header" (click)="onHeaderClick('showExercisesList')">
+        <h4><b>Упражнения</b></h4>
+        <ion-icon *ngIf="showExercisesList" name="chevron-up-outline" size="small"></ion-icon>
+        <ion-icon *ngIf="!showExercisesList" name="chevron-down-outline" size="small"></ion-icon>
+      </div>
+      <div *ngIf="showExercisesList">
+        <a *ngFor="let e of exercises" [routerLink]="e.url"><p>{{e.name}}</p></a>
+      </div>
+    </div>
+
+    <div class="in-construction">
+      <div class="group">
+        <div class="group-header" (click)="onHeaderClick('showExercisesList')">
+          <h4>Травы</h4>
+          <ion-icon *ngIf="showExercisesList" name="chevron-up-outline" size="small"></ion-icon>
+          <ion-icon *ngIf="!showExercisesList" name="chevron-down-outline" size="small"></ion-icon>
+        </div>
+
+      </div>
+
+      <div class="group">
+        <div class="group-header" (click)="onHeaderClick('showExercisesList')">
+          <h4>Камни</h4>
+          <ion-icon *ngIf="showExercisesList" name="chevron-up-outline" size="small"></ion-icon>
+          <ion-icon *ngIf="!showExercisesList" name="chevron-down-outline" size="small"></ion-icon>
+        </div>
+
+      </div>
+
+      <div class="group">
+        <div class="group-header" (click)="onHeaderClick('showExercisesList')">
+          <h4>Животные</h4>
+          <ion-icon *ngIf="showExercisesList" name="chevron-up-outline" size="small"></ion-icon>
+          <ion-icon *ngIf="!showExercisesList" name="chevron-down-outline" size="small"></ion-icon>
+        </div>
+
+      </div>
+
+      <div class="group">
+        <div class="group-header" (click)="onHeaderClick('showExercisesList')">
+          <h4>Персонажи</h4>
+          <ion-icon *ngIf="showExercisesList" name="chevron-up-outline" size="small"></ion-icon>
+          <ion-icon *ngIf="!showExercisesList" name="chevron-down-outline" size="small"></ion-icon>
+        </div>
+
+      </div>
+
+      <div class="group">
+        <div class="group-header" (click)="onHeaderClick('showExercisesList')">
+          <h4>Артефакты</h4>
+          <ion-icon *ngIf="showExercisesList" name="chevron-up-outline" size="small"></ion-icon>
+          <ion-icon *ngIf="!showExercisesList" name="chevron-down-outline" size="small"></ion-icon>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</ion-content>
