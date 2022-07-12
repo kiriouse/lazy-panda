@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonicAuthService } from '../../services/ionic-auth.service';
 
 @Component({
   selector: 'app-top',
@@ -6,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top.component.scss'],
 })
 export class TopComponent implements OnInit {
+  userDetail: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }
