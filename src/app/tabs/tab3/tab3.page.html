@@ -5,7 +5,13 @@
     <div class="row">
       <app-icon
         [src]="'../../assets/practice-previews/meditation.png'"
-        routerLink="/audio-player"
+        routerLink="/timer"
+        [queryParams]="{
+          img: '../../assets/practice-previews/meditationTimer.png',
+          title: 'Медитация',
+          subTitle: 'регулярная практика',
+          playColor: '#6EC7F5'
+          }"
         [level]="1"
         [disabled]="false"
         title="Медитация"
