@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, timer } from 'rxjs';
 import { finalize, map, takeUntil, takeWhile } from 'rxjs/operators';
 import { PickerController } from '@ionic/angular';
+import { CrudService } from '../../../shared/services/crud.service';
+import { DataConvertService } from '../../../shared/services/data-convert.service';
 
 @Component({
   selector: 'app-timer',
@@ -20,16 +22,24 @@ export class TimerComponent implements OnInit {
   buffer_: number = 0;
   timerValue = '00:00:00';
   progressbarVisible = false;
+  secondsCounter = 0;
+  timerEnd = 0;
 
   timer$ = timer(0, 1000).pipe(
     takeUntil(this.stop$),
     takeWhile((_) => this.value_ < 1),
-    finalize(() => this.someMethod()),
+    finalize(() => this.saveHoursToDB()),
     map((_) => {
-      this.value_ = this.value_ + 1 / this.getSeconds(this.timerValue);
-      this.timerValue = this.secondsToString(
-        this.getSeconds(this.timerValue) - 1
+      this.secondsCounter++;
+      this.value_ = this.value_ + this.timerEnd;
+      this.timerValue = this.dataConvertService.secondsToString(
+        this.dataConvertService.getSeconds(this.timerValue) - 1
       );
+
+      if (this.timerValue === '00:00:00') {
+        this.progressbarVisible = false;
+      }
+
       return this.value_;
     })
   );
@@ -37,7 +47,9 @@ export class TimerComponent implements OnInit {
   constructor(
     private location: Location,
     private route: ActivatedRoute,
-    private pickerCtrl: PickerController
+    private pickerCtrl: PickerController,
+    private crudService: CrudService,
+    private dataConvertService: DataConvertService
   ) {}
 
   ngOnInit() {
@@ -47,35 +59,14 @@ export class TimerComponent implements OnInit {
     this.playColor = this.route.snapshot.queryParamMap.get('playColor');
   }
 
-  someMethod() {
-    console.log('test');
-  }
+  saveHoursToDB() {
+    console.log(this.secondsCounter);
+    this.buffer_ = 0;
+    this.value_ = 0;
+    this.secondsCounter = 0;
+    this.progressbarVisible = false;
 
-  getSeconds(s: string): number {
-    const a = s.split(':');
-    return +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
-  }
-
-  secondsToString(n: number): string {
-    const sec_num = parseInt(n.toString(), 10); // don't forget the second param
-    let hours = Math.floor(sec_num / 3600).toString();
-    let minutes = Math.floor((sec_num - Number(hours) * 3600) / 60).toString();
-    let seconds = (
-      sec_num -
-      Number(hours) * 3600 -
-      Number(minutes) * 60
-    ).toString();
-
-    if (Number(hours) < 10) {
-      hours = '0' + hours;
-    }
-    if (Number(minutes) < 10) {
-      minutes = '0' + minutes;
-    }
-    if (Number(seconds) < 10) {
-      seconds = '0' + seconds;
-    }
-    return hours + ':' + minutes + ':' + seconds;
+    // this.crudService.update(this.timerValue);
   }
 
   goBack() {
@@ -83,20 +74,6 @@ export class TimerComponent implements OnInit {
   }
 
   async openPicker() {
-    const options = [
-      { text: '00', value: 0 },
-      { text: '01', value: 1 },
-      { text: '02', value: 2 },
-      { text: '03', value: 3 },
-      { text: '04', value: 4 },
-      { text: '05', value: 5 },
-      { text: '06', value: 6 },
-      { text: '06', value: 6 },
-      { text: '07', value: 7 },
-      { text: '08', value: 8 },
-      { text: '09', value: 9 },
-    ];
-
     const hours = [];
     const minutes = [];
     const seconds = [];
@@ -158,9 +135,11 @@ export class TimerComponent implements OnInit {
 
   play() {
     this.progressbarVisible = true;
+    this.timerEnd = 1 / this.dataConvertService.getSeconds(this.timerValue);
   }
 
   stop() {
     this.progressbarVisible = false;
+    this.timerValue = '00:00:00';
   }
 }
