@@ -10,6 +10,7 @@ import { IonicAuthService } from './ionic-auth.service';
 import { Storage } from '@ionic/storage';
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 import { DataConvertService } from './data-convert.service';
+import { map } from 'rxjs/operators';
 
 export class TODO {
   $key: string;
@@ -21,7 +22,7 @@ export class TODO {
   providedIn: 'root',
 })
 export class CrudService {
-  private progressInTime: AngularFirestoreCollection<{ time: string }>;
+  progressInTime: AngularFirestoreCollection<{ time: string }>;
   items: Observable<Item[]>;
   uid = '';
 
@@ -47,6 +48,23 @@ export class CrudService {
     });
   }
 
+  getHoursValue() {
+    return this.storage.get('uid').then((uid) => {
+      this.uid = uid;
+      this.progressInTime = this.firestore.collection<{ time: string }>(
+        `user/${uid}/progress-in-time`
+      );
+      return this.progressInTime
+        .doc('meditation')
+        .get()
+        .pipe(
+          map((data: DocumentSnapshot<{ time: string }>) => {
+            return Number(data.data().time.split(':')[0]);
+          })
+        );
+    });
+  }
+
   update(time: string): void {
     this.progressInTime
       .doc('meditation')
@@ -60,9 +78,14 @@ export class CrudService {
           dbTimeValue + currentTimeValue
         );
         console.log(newTimeValue);
+        this.progressInTime
+          .doc('meditation')
+          .update({ time: newTimeValue })
+          .then(
+            () => console.log('success'),
+            (err) => console.log(err)
+          );
       });
-    // DocumentSnapshot<{time: string}>
-    //   this.progressInTime.doc('meditation').update()
   }
 
   getCollection(docPath) {

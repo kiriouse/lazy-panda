@@ -1,6 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicAuthService } from '../../services/ionic-auth.service';
+import { CrudService } from '../../services/crud.service';
+import { Observable } from 'rxjs';
+import firebase from 'firebase/compat';
+import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 
 @Component({
   selector: 'app-top',
@@ -8,7 +12,14 @@ import { IonicAuthService } from '../../services/ionic-auth.service';
   styleUrls: ['./top.component.scss'],
 })
 export class TopComponent implements OnInit {
-  constructor() {}
+  constructor(private crudService: CrudService) {}
 
-  ngOnInit() {}
+  hours: Observable<number>;
+
+  ngOnInit() {
+    this.crudService.getHoursValue().then(
+      (res) => (this.hours = res),
+      (err) => console.log(err)
+    );
+  }
 }

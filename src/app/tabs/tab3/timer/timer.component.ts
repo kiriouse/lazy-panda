@@ -67,7 +67,7 @@ export class TimerComponent implements OnInit {
         .then(
           () => {
             this.nativeAudio.setVolumeForComplexAsset('ring', 0.9).then(
-              () => console.log('success'),
+              (res) => console.log(res),
               (err) => console.log(err)
             );
           },
@@ -76,22 +76,6 @@ export class TimerComponent implements OnInit {
           }
         );
     }, 3000);
-  }
-
-  saveHoursToDB() {
-    this.buffer_ = 0;
-    this.value_ = 0;
-    this.secondsCounter = 0;
-    this.progressbarVisible = false;
-
-    this.nativeAudio.play('ring', () => console.log('ring is done playing'));
-
-    this.insomnia.allowSleepAgain().then(
-      () => console.log('success'),
-      () => console.log('error')
-    );
-
-    // this.crudService.update(this.timerValue);
   }
 
   goBack() {
@@ -173,6 +157,21 @@ export class TimerComponent implements OnInit {
     this.insomnia.allowSleepAgain().then(
       () => console.log('success'),
       () => console.log('error')
+    );
+  }
+
+  saveHoursToDB() {
+    this.crudService.update(
+      this.dataConvertService.secondsToString(this.secondsCounter)
+    );
+    this.buffer_ = 0;
+    this.value_ = 0;
+    this.secondsCounter = 0;
+    this.progressbarVisible = false;
+    this.nativeAudio.play('ring', () => console.log('ring is done playing'));
+    this.insomnia.allowSleepAgain().then(
+      (res) => console.log(res),
+      (err) => console.log(err)
     );
   }
 }
