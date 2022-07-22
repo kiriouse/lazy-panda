@@ -8,8 +8,6 @@ import { IonicAuthService } from '../../services/ionic-auth.service';
   styleUrls: ['./top.component.scss'],
 })
 export class TopComponent implements OnInit {
-  userDetail: string;
-
   constructor() {}
 
   ngOnInit() {}

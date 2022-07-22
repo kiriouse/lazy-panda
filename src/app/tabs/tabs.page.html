@@ -1,16 +1,15 @@
 <ion-tabs>
+    <app-side-menu></app-side-menu>
+
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1" style="background-image: url(../../assets/home.svg)">
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2" style="background-image: url(../../assets/first.svg)">
+    <ion-tab-button [disabled]="isUserLoggedIn | async" tab="tab2" style="background-image: url(../../assets/first.svg)">
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3" style="background-image: url(../../assets/second.svg)">
+    <ion-tab-button [disabled]="isUserLoggedIn | async" tab="tab3" style="background-image: url(../../assets/second.svg)">
     </ion-tab-button>
-
-    <!--    <ion-tab-button tab="tab4" style="background-image: url(../../assets/third.svg)">-->
-    <!--    </ion-tab-button>-->
   </ion-tab-bar>
 
 </ion-tabs>

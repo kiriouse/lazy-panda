@@ -1,17 +1,39 @@
-<ion-content [fullscreen]="true">
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Регистрация</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <div id="container">
-    <strong>Авторизация</strong>
+<ion-content class="ion-padding">
+  <form class="form" [formGroup]="userForm" (ngSubmit)="signUp(userForm.value)">
+    <ion-item>
+      <ion-label position="floating">Почта</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
 
-    <img (click)="null" class="icon" src="../../assets/google.svg" alt="Авторизация с помощью Google">
-    <img class="icon" src="../../assets/facebook.svg" alt="Авторизация с помощью Facebook">
-    <img class="icon" src="../../assets/apple_logo.svg" alt="Авторизация с помощью Apple">
-    <img class="icon" src="../../assets/android.svg" alt="Авторизация с помощью Android">
+    <ng-container *ngFor="let error of errorMessage.email">
+      <div *ngIf="userForm.get('email').hasError(error.type) && (userForm.get('email').dirty || userForm.get('email').touched)">
+        {{ error.message }}
+      </div>
+    </ng-container>
 
+    <ion-item>
+      <ion-label position="floating" color="primary">Пароль</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required="true"></ion-input>
+    </ion-item>
 
-    <p>
-      <a href="javascript:history.back()">Назад</a>
-    </p>
+    <ng-container *ngFor="let error of errorMessage.password">
+      <div *ngIf="userForm.get('password').hasError(error.type) && (userForm.get('password').dirty || userForm.get('password').touched)">
+        {{ error.message }}
+      </div>
+    </ng-container>
 
-  </div>
+    <ion-button type="submit" expand="block" [disabled]="!userForm.valid">Регистрация</ion-button>
+
+    <label class="ion-text-center" color="danger">{{errorMsg}}</label>
+    <label class="ion-text-center" color="success">{{successMsg}}</label>
+  </form>
+  <p class="ion-text-center">Уже зарегистрированы? <a (click)="goToLogin()">Логин</a></p>
+  <br/>
+  <p class="ion-text-center"><a routerLink="/"><< На главный экран</a></p>
 </ion-content>

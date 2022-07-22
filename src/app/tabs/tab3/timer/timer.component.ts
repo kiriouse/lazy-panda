@@ -6,6 +6,8 @@ import { finalize, map, takeUntil, takeWhile } from 'rxjs/operators';
 import { PickerController } from '@ionic/angular';
 import { CrudService } from '../../../shared/services/crud.service';
 import { DataConvertService } from '../../../shared/services/data-convert.service';
+import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
+import { Insomnia } from '@awesome-cordova-plugins/insomnia/ngx';
 
 @Component({
   selector: 'app-timer',
@@ -49,7 +51,9 @@ export class TimerComponent implements OnInit {
     private route: ActivatedRoute,
     private pickerCtrl: PickerController,
     private crudService: CrudService,
-    private dataConvertService: DataConvertService
+    private dataConvertService: DataConvertService,
+    private nativeAudio: NativeAudio,
+    private insomnia: Insomnia
   ) {}
 
   ngOnInit() {
@@ -57,14 +61,35 @@ export class TimerComponent implements OnInit {
     this.img = this.route.snapshot.queryParamMap.get('img');
     this.subTitle = this.route.snapshot.queryParamMap.get('subTitle');
     this.playColor = this.route.snapshot.queryParamMap.get('playColor');
+    setTimeout(() => {
+      this.nativeAudio
+        .preloadComplex('ring', 'assets/mp3/tibetan-bell-sound.mp3', 1, 1, 0)
+        .then(
+          () => {
+            this.nativeAudio.setVolumeForComplexAsset('ring', 0.9).then(
+              () => console.log('success'),
+              (err) => console.log(err)
+            );
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    }, 3000);
   }
 
   saveHoursToDB() {
-    console.log(this.secondsCounter);
     this.buffer_ = 0;
     this.value_ = 0;
     this.secondsCounter = 0;
     this.progressbarVisible = false;
+
+    this.nativeAudio.play('ring', () => console.log('ring is done playing'));
+
+    this.insomnia.allowSleepAgain().then(
+      () => console.log('success'),
+      () => console.log('error')
+    );
 
     // this.crudService.update(this.timerValue);
   }
@@ -136,10 +161,18 @@ export class TimerComponent implements OnInit {
   play() {
     this.progressbarVisible = true;
     this.timerEnd = 1 / this.dataConvertService.getSeconds(this.timerValue);
+    this.insomnia.keepAwake().then(
+      () => console.log('success'),
+      () => console.log('error')
+    );
   }
 
   stop() {
     this.progressbarVisible = false;
     this.timerValue = '00:00:00';
+    this.insomnia.allowSleepAgain().then(
+      () => console.log('success'),
+      () => console.log('error')
+    );
   }
 }
