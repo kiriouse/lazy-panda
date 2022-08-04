@@ -161,9 +161,7 @@ export class TimerComponent implements OnInit {
   }
 
   saveHoursToDB() {
-    this.crudService.update(
-      this.dataConvertService.secondsToString(this.secondsCounter)
-    );
+    this.crudService.update(this.secondsCounter);
     this.buffer_ = 0;
     this.value_ = 0;
     this.secondsCounter = 0;

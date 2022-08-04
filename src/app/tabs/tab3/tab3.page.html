@@ -12,7 +12,7 @@
           subTitle: 'регулярная практика',
           playColor: '#6EC7F5'
           }"
-        [level]="1"
+        [hours]="meditationHours"
         [disabled]="false"
         title="Медитация"
         subTitle="регулярная практика"
@@ -21,12 +21,12 @@
     </div>
     <br/>
     <div class="row">
-      <app-icon [src]="'../../assets/practice-previews/stand.png'" [level]="1" [disabled]="false" title="Столбы"
+      <app-icon [src]="'../../assets/practice-previews/stand.png'" [hours]="1" [disabled]="false" title="Столбы"
                 subTitle="регулярная практика"></app-icon>
     </div>
     <br/>
     <div class="row">
-      <app-icon [src]="'../../assets/practice-previews/qigong.png'" [level]="2" [disabled]="false" title="Цигун"
+      <app-icon [src]="'../../assets/practice-previews/qigong.png'" [hours]="2" [disabled]="false" title="Цигун"
                 subTitle="регулярная практика"></app-icon>
     </div>
   </div>

@@ -9,7 +9,7 @@
 
     <strong class="logoSubtitle">Lazy Panda</strong>
     <br/>
-    <div class="authorizationContainer">
+    <div *ngIf="isAuthorized | async" class="authorizationContainer">
       <p><a rel="noopener noreferrer" routerLink="/registration">Регистрация</a></p>
       <p><a rel="noopener noreferrer" routerLink="/login">Вход</a></p>
     </div>

@@ -12,17 +12,16 @@ import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 import { DataConvertService } from './data-convert.service';
 import { map } from 'rxjs/operators';
 
-export class TODO {
-  $key: string;
-  title: string;
-  description: string;
+interface Time {
+  time: number;
+  count: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class CrudService {
-  progressInTime: AngularFirestoreCollection<{ time: string }>;
+  progressInTime: AngularFirestoreCollection<Time>;
   items: Observable<Item[]>;
   uid = '';
 
@@ -34,7 +33,7 @@ export class CrudService {
   ) {
     storage.get('uid').then((uid) => {
       this.uid = uid;
-      this.progressInTime = firestore.collection<{ time: string }>(
+      this.progressInTime = firestore.collection<Time>(
         `user/${uid}/progress-in-time`
       );
       this.firestore
@@ -42,7 +41,7 @@ export class CrudService {
         .get()
         .subscribe((doc) => {
           if (!doc.exists) {
-            this.progressInTime.doc('meditation').set({ time: '00:00:00' });
+            this.progressInTime.doc('meditation').set({ time: 0, count: 0 });
           }
         });
     });
@@ -51,36 +50,55 @@ export class CrudService {
   getHoursValue() {
     return this.storage.get('uid').then((uid) => {
       this.uid = uid;
-      this.progressInTime = this.firestore.collection<{ time: string }>(
+      this.progressInTime = this.firestore.collection<Time>(
         `user/${uid}/progress-in-time`
       );
       return this.progressInTime
         .doc('meditation')
         .get()
         .pipe(
-          map((data: DocumentSnapshot<{ time: string }>) => {
-            return Number(data.data().time.split(':')[0]);
+          map((data: DocumentSnapshot<Time>) => {
+            return data.data().time && data.data().time / 60 / 60 > 1
+              ? Math.floor(data.data().time / 60 / 60)
+              : 0;
           })
         );
     });
   }
 
-  update(time: string): void {
+  getCountValue() {
+    return this.storage.get('uid').then((uid) => {
+      this.uid = uid;
+      this.progressInTime = this.firestore.collection<Time>(
+        `user/${uid}/progress-in-time`
+      );
+      return this.progressInTime
+        .doc('meditation')
+        .get()
+        .pipe(
+          map((data: DocumentSnapshot<Time>) => {
+            return data.data().count ? data.data().count : 0;
+          })
+        );
+    });
+  }
+
+  update(seconds: number): void {
     this.progressInTime
       .doc('meditation')
       .get()
-      .subscribe((data: DocumentSnapshot<{ time: string }>) => {
-        const dbTimeValue = this.dataConvertService.getSeconds(
-          data.data().time
-        );
-        const currentTimeValue = this.dataConvertService.getSeconds(time);
-        const newTimeValue = this.dataConvertService.secondsToString(
-          dbTimeValue + currentTimeValue
-        );
-        console.log(newTimeValue);
+      .subscribe((data: DocumentSnapshot<Time>) => {
+        const dbTimeValue = data.data().time;
+        const dbCountValue = data.data().count;
+        const newTimeValue = dbTimeValue + seconds;
+        let newCountValue = dbCountValue;
+        if (seconds > 300) {
+          newCountValue ? newCountValue++ : (newCountValue = 1);
+        }
+
         this.progressInTime
           .doc('meditation')
-          .update({ time: newTimeValue })
+          .update({ time: newTimeValue, count: newCountValue })
           .then(
             () => console.log('success'),
             (err) => console.log(err)
@@ -93,23 +111,4 @@ export class CrudService {
       .collection(`user/${this.uid}/progress-in-time`)
       .doc(`user/${this.uid}/progress-in-time/${docPath}`);
   }
-  //
-  // getTask(id) {
-  //   return this.firestore.collection('tasks').doc(id).valueChanges();
-  // }
-  //
-  // update(id, todo: TODO) {
-  //   this.ngFirestore
-  //     .collection('tasks')
-  //     .doc(id)
-  //     .update(todo)
-  //     .then(() => {
-  //       this.router.navigate(['/todo-list']);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }
-  //
-  // delete(id: string) {
-  //   this.ngFirestore.doc('tasks/' + id).delete();
-  // }
 }

@@ -12,13 +12,19 @@ import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
   styleUrls: ['./top.component.scss'],
 })
 export class TopComponent implements OnInit {
-  constructor(private crudService: CrudService) {}
+  constructor(
+    private crudService: CrudService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  hours: Observable<number>;
+  count: Observable<number>;
 
   ngOnInit() {
-    this.crudService.getHoursValue().then(
-      (res) => (this.hours = res),
+    this.crudService.getCountValue().then(
+      (res) => {
+        this.count = res;
+        this.cdr.markForCheck();
+      },
       (err) => console.log(err)
     );
   }
