@@ -21,8 +21,21 @@
     </div>
     <br/>
     <div class="row">
-      <app-icon [src]="'../../assets/practice-previews/stand.png'" [hours]="1" [disabled]="false" title="Столбы"
-                subTitle="регулярная практика"></app-icon>
+      <app-icon
+        [src]="'../../assets/practice-previews/stand.png'"
+        routerLink="/timer"
+        [queryParams]="{
+          img: '../../assets/practice-previews/standTimer.png',
+          title: 'Столбовое стояние',
+          subTitle: 'регулярная практика',
+          playColor: '#6EC7F5'
+          }"
+        [hours]="standHours"
+        [disabled]="false"
+        title="Столбы"
+        subTitle="регулярная практика">
+
+      </app-icon>
     </div>
     <br/>
     <div class="row">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, timer } from 'rxjs';
@@ -53,7 +53,8 @@ export class TimerComponent implements OnInit {
     private crudService: CrudService,
     private dataConvertService: DataConvertService,
     private nativeAudio: NativeAudio,
-    private insomnia: Insomnia
+    private insomnia: Insomnia,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -79,6 +80,7 @@ export class TimerComponent implements OnInit {
   }
 
   goBack() {
+    this.cdr.detectChanges();
     this.location.back();
   }
 
@@ -167,6 +169,7 @@ export class TimerComponent implements OnInit {
     this.secondsCounter = 0;
     this.progressbarVisible = false;
     this.nativeAudio.play('ring', () => console.log('ring is done playing'));
+
     this.insomnia.allowSleepAgain().then(
       (res) => console.log(res),
       (err) => console.log(err)

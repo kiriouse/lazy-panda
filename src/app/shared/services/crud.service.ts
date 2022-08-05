@@ -28,8 +28,7 @@ export class CrudService {
   constructor(
     private readonly firestore: AngularFirestore,
     private authService: IonicAuthService,
-    private storage: Storage,
-    private dataConvertService: DataConvertService
+    private storage: Storage
   ) {
     storage.get('uid').then((uid) => {
       this.uid = uid;
@@ -47,14 +46,14 @@ export class CrudService {
     });
   }
 
-  getHoursValue() {
+  getHoursValue(typeOfActivity: string) {
     return this.storage.get('uid').then((uid) => {
       this.uid = uid;
       this.progressInTime = this.firestore.collection<Time>(
         `user/${uid}/progress-in-time`
       );
       return this.progressInTime
-        .doc('meditation')
+        .doc(typeOfActivity)
         .get()
         .pipe(
           map((data: DocumentSnapshot<Time>) => {
@@ -92,9 +91,9 @@ export class CrudService {
         const dbCountValue = data.data().count;
         const newTimeValue = dbTimeValue + seconds;
         let newCountValue = dbCountValue;
-        if (seconds > 300) {
-          newCountValue ? newCountValue++ : (newCountValue = 1);
-        }
+        // if (seconds > 300) {
+        newCountValue ? newCountValue++ : (newCountValue = 1);
+        // }
 
         this.progressInTime
           .doc('meditation')

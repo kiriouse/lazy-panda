@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { IonicAuthService } from '../../services/ionic-auth.service';
 import { CrudService } from '../../services/crud.service';
 import { Observable } from 'rxjs';
@@ -14,14 +14,28 @@ import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 export class TopComponent implements OnInit {
   constructor(
     private crudService: CrudService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) {
+    router.events.forEach((event) => {
+      if (
+        event instanceof NavigationStart &&
+        (event.url === '/tabs/tab2' || event.url === '/tabs/tab3')
+      ) {
+        this.getMeditationHours();
+      }
+    });
+  }
 
   count: Observable<number>;
 
   ngOnInit() {
+    this.getMeditationHours();
+  }
+
+  getMeditationHours() {
     this.crudService.getCountValue().then(
-      (res) => {
+      (res: Observable<number>) => {
         this.count = res;
         this.cdr.markForCheck();
       },
