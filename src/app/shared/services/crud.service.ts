@@ -91,9 +91,9 @@ export class CrudService {
         const dbCountValue = data.data().count;
         const newTimeValue = dbTimeValue + seconds;
         let newCountValue = dbCountValue;
-        // if (seconds > 300) {
-        newCountValue ? newCountValue++ : (newCountValue = 1);
-        // }
+        if (seconds > 300) {
+          newCountValue ? newCountValue++ : (newCountValue = 1);
+        }
 
         this.progressInTime
           .doc('meditation')
