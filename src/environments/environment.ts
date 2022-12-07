@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyDNqSLFrwNWUWdCeBSVlvBhVVHI7iHggBM',
+    authDomain: 'lazy-panda-3a752.firebaseapp.com',
+    projectId: 'lazy-panda-3a752',
+    storageBucket: 'lazy-panda-3a752.appspot.com',
+    messagingSenderId: '761910245415',
+    appId: '1:761910245415:web:dcdd9fcb8e76cfff4d3602'
+  }
 };
 
 

@@ -23,14 +23,6 @@ app-icon {
   margin: 5px 0;
 }
 
-
-@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
-  .row {
-    padding: 20px 0;
-    margin: 100px 0;
-  }
-}
-
 .badge {
   display: flex;
   align-items: center;

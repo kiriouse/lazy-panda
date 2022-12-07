@@ -1,5 +1,7 @@
 <div class="container">
-  <div [ngClass]="disabled ? 'badge badge-disabled' : 'badge'">{{level}}</div>
+  <div *ngIf="hours" [ngClass]="disabled ? 'badge badge-disabled' : 'badge'">
+    <span class="badge-label">{{'Часов практики:'}}
+    </span><b>{{hours}}</b></div>
   <img [ngClass]="disabled ? 'preview preview-disabled' : 'preview'" [src]="src" alt="Хранение одного"/>
   <div class="titleContainer">
     <p [ngClass]="disabled ? 'title title-disabled' : 'title'">{{title}}</p>

@@ -5,8 +5,15 @@
     <div class="row">
       <app-icon
         [src]="'../../assets/practice-previews/meditation.png'"
-        routerLink="/audio-player"
-        [level]="1"
+        routerLink="/timer"
+        [queryParams]="{
+          img: '../../assets/practice-previews/meditationTimer.png',
+          title: 'Медитация',
+          subTitle: 'регулярная практика',
+          type: 'meditation',
+          playColor: '#6EC7F5'
+          }"
+        [hours]="meditationHours"
         [disabled]="false"
         title="Медитация"
         subTitle="регулярная практика"
@@ -15,13 +22,55 @@
     </div>
     <br/>
     <div class="row">
-      <app-icon [src]="'../../assets/practice-previews/stand.png'" [level]="1" [disabled]="false" title="Столбы"
-                subTitle="регулярная практика"></app-icon>
+      <app-icon
+        [src]="'../../assets/theory-previews/breath.jpeg'"
+        routerLink="/audio-player"
+        [queryParams]="{
+          link: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1296571417&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+          title: 'Медитация на развитие концентрации'
+          }"
+        [hours]="1"
+        [disabled]="false"
+        title="Практика"
+        subTitle="дыхательных упражнений"
+      >
+      </app-icon>
+
+
+      <app-icon [src]="'../../assets/theory-previews/breath-2.jpeg'" [hours]="1" [disabled]="false" title="Практика"
+                subTitle="задержки дыхания"
+                routerLink="/chronometer"
+                [queryParams]="{
+                  img: '../../assets/practice-previews/apnea.jpeg',
+                  title: 'Практика',
+                  subTitle: 'задержки дыхания',
+                  type: 'apnea',
+                  playColor: '#6EC7F5'
+          }"
+      >
+      </app-icon>
+
+
+    </div>
+    <div class="row">
+      <app-icon
+        [src]="'../../assets/practice-previews/stand.png'"
+        routerLink="/timer"
+        [queryParams]="{
+          img: '../../assets/practice-previews/standTimer.png',
+          title: 'Столбовое стояние',
+          subTitle: 'регулярная практика',
+          type: 'stand',
+          playColor: '#f56e73'
+          }"
+        [hours]="standHours"
+        [disabled]="false"
+        title="Столбы"
+        subTitle="регулярная практика">
+
+      </app-icon>
     </div>
     <br/>
-    <div class="row">
-      <app-icon [src]="'../../assets/practice-previews/qigong.png'" [level]="2" [disabled]="false" title="Цигун"
-                subTitle="регулярная практика"></app-icon>
-    </div>
+
   </div>
 </ion-content>

@@ -11,9 +11,16 @@
       "extends": [
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "eslint:recommended",
+        "google"
       ],
       "rules": {
+        "new-cap": 0,
+        "require-jsdoc": 0,
+        "max-len": ["error", {"code": 120}],
+        "indent": 0,
+        "object-curly-spacing": 0,
         "@angular-eslint/component-class-suffix": [
           "error",
           {

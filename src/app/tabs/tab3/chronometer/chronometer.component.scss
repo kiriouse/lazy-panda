@@ -1,0 +1,79 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 0;
+}
+
+.exit {
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+}
+.top {
+  padding: 10px 20px;
+}
+
+.title-container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titles {
+  position: absolute;
+  left: 30px;
+  margin-top: 20px;
+  p {
+    margin: 0;
+    color: white;
+    filter: drop-shadow(1px 1px 3px #858585);
+  }
+
+}
+.subtitle {
+  //font-weight: lighter;
+  filter: drop-shadow(1px 1px 1px #000000);
+}
+.timer {
+  margin: 20px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 70px;
+  font-weight: lighter;
+  color: grey;
+}
+.description {
+  margin: 20px;
+  font-weight: lighter;
+}
+.buttons-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+.stop-button, .play-button {
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  img {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+.pick-button {
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  img {
+    width: 150px;
+    height: 150px;
+  }
+}
