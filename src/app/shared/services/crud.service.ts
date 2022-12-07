@@ -43,6 +43,15 @@ export class CrudService {
             this.progressInTime.doc('meditation').set({ time: 0, count: 0 });
           }
         });
+
+      this.firestore
+        .doc(`user/${uid}/progress-in-time/stand`)
+        .get()
+        .subscribe((doc) => {
+          if (!doc.exists) {
+            this.progressInTime.doc('stand').set({ time: 0, count: 0 });
+          }
+        });
     });
   }
 
@@ -57,7 +66,7 @@ export class CrudService {
         .get()
         .pipe(
           map((data: DocumentSnapshot<Time>) => {
-            return data.data().time && data.data().time / 60 / 60 > 1
+            return data.data()?.time && data.data()?.time / 60 / 60 > 1
               ? Math.floor(data.data().time / 60 / 60)
               : 0;
           })
@@ -65,14 +74,21 @@ export class CrudService {
     });
   }
 
-  getCountValue() {
+  getCountValue(practiceType, uuid) {
     return this.storage.get('uid').then((uid) => {
       this.uid = uid;
-      this.progressInTime = this.firestore.collection<Time>(
-        `user/${uid}/progress-in-time`
-      );
+      if (uuid) {
+        this.progressInTime = this.firestore.collection<Time>(
+          `user/${uuid}/progress-in-time`
+        );
+      } else {
+        this.progressInTime = this.firestore.collection<Time>(
+          `user/${uid}/progress-in-time`
+        );
+      }
+
       return this.progressInTime
-        .doc('meditation')
+        .doc(practiceType)
         .get()
         .pipe(
           map((data: DocumentSnapshot<Time>) => {
@@ -82,21 +98,21 @@ export class CrudService {
     });
   }
 
-  update(seconds: number): void {
+  update(seconds: number, practiceType: string): void {
     this.progressInTime
-      .doc('meditation')
+      .doc(practiceType)
       .get()
       .subscribe((data: DocumentSnapshot<Time>) => {
         const dbTimeValue = data.data().time;
         const dbCountValue = data.data().count;
         const newTimeValue = dbTimeValue + seconds;
         let newCountValue = dbCountValue;
-        if (seconds > 300) {
-          newCountValue ? newCountValue++ : (newCountValue = 1);
-        }
+        // if (seconds > 300) {
+        newCountValue ? newCountValue++ : (newCountValue = 1);
+        // }
 
         this.progressInTime
-          .doc('meditation')
+          .doc(practiceType)
           .update({ time: newTimeValue, count: newCountValue })
           .then(
             () => console.log('success'),

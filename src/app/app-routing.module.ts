@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { GoldenFlowerComponent } from './guides/exercises/golden-flower/golden-flower.component';
-import { SixHealingSoundsComponent } from './guides/exercises/six-healing-sounds/six-healing-sounds.component';
 import { AudioPlayerComponent } from './shared/modules/audio-player/audio-player.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { TimerComponent } from './tabs/tab3/timer/timer.component';
+import { AuthGuard } from './shared/auth-guard/auth.guard';
+import { ChronometerComponent } from './tabs/tab3/chronometer/chronometer.component';
 
 const routes: Routes = [
   {
@@ -65,11 +65,25 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'chronometer',
+    component: ChronometerComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./tabs/tab3/chronometer/chronometer-routing.module').then(
+            (m) => m.ChronometerRoutingModule
+          ),
+      },
+    ],
+  },
 ];
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
+  providers: [AuthGuard],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

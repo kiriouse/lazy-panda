@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "LongCangRegular";
-  src: url("../../../assets/fonts/LongCang-Regular.ttf");
+  font-family: "ChinaCyr";
+  src: url("../../../assets/fonts/chinacyr.ttf");
 }
 
 .group {
@@ -10,7 +10,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
   height: 90%;
   position: absolute;
@@ -19,35 +19,25 @@
   color: #525252;
   font-size: 20px;
   line-height: 26px;
+  background: url('../../../assets/main_screen_background.jpeg') no-repeat center bottom;
+  background-size: 600px 620px;
+  filter:  brightness(1.15) saturate(0.6);
 }
 
 .authorizationContainer {
   width: 100%;
+  height: 30px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  padding: 0 30px;
+  margin-top: -25px;
 }
 
 .authorizationContainer p a{
   color: red;
 }
-
-.container .logo {
-  font-size: 150px;
-  color: #3d3d3d;
-  font-family: "LongCangRegular", sans-serif;
-  margin: 100px;
-}
-
-.logoSubtitle{
-  padding: 10px 20px 15px 20px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  font-size: 25px;
-  margin-top: -20px;
-  margin-bottom: -20px;
-}
-
-
 
 .group-header {
   display: flex;

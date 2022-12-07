@@ -67,8 +67,7 @@ export class LoginPageComponent implements OnInit {
 
   signIn(value) {
     this.ionicAuthService.signinUser(value).then(
-      (response) => {
-        this.storage.set('uid', response.user.multiFactor.user.uid);
+      () => {
         this.router.navigateByUrl('/tabs/tab2');
       },
       (error) => {

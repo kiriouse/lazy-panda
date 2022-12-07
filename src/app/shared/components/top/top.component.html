@@ -1,19 +1,22 @@
 <div class="top">
   <div class="container">
     <img class="icon" src="../../../../assets/icons/meditation-icon.png">
-    <p class="label">{{count | async}}</p>
+    <p *ngIf="!meditationIsLoading" class="label">{{meditationCount}}</p>
+    <ion-spinner *ngIf="meditationIsLoading" name="bubbles"></ion-spinner>
   </div>
   <div class="container">
     <img class="icon" src="../../../../assets/icons/qigong-icon.png">
+    <p  *ngIf="!standIsLoading" class="label">{{standCount}}</p>
+    <ion-spinner *ngIf="standIsLoading" name="bubbles"></ion-spinner>
+
+  </div>
+  <div class="container">
+    <img class="icon" src="../../../../assets/icons/breath.png">
     <p class="label">0</p>
   </div>
   <div class="container">
-    <img class="icon" src="../../../../assets/icons/stand-icon.png">
-    <p class="label">0</p>
-  </div>
-  <div class="container">
-    <img class="icon" src="../../../../assets/icons/stretching-icon.png">
-    <p class="label">0</p>
+<!--    <img class="icon" src="../../../../assets/icons/stretching-icon.png">-->
+<!--    <p class="label">0</p>-->
   </div>
   <div class="container">
     <ion-menu-button menu="main">

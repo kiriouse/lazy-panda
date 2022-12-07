@@ -22,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimerModule } from './tabs/tab3/timer/timer.module';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { Tab2PageModule } from './tabs/tab2/tab2.module';
-import { CrudService } from './shared/services/crud.service';
+import { AuthGuard } from './shared/auth-guard/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,6 +48,7 @@ import { CrudService } from './shared/services/crud.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativeAudio,
     Insomnia,
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

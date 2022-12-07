@@ -11,11 +11,11 @@ import { Insomnia } from '@awesome-cordova-plugins/insomnia/ngx';
 import { Storage } from '@ionic/storage';
 
 @Component({
-  selector: 'app-timer',
-  templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.scss'],
+  selector: 'app-chronometer',
+  templateUrl: './chronometer.component.html',
+  styleUrls: ['./chronometer.component.scss'],
 })
-export class TimerComponent implements OnInit {
+export class ChronometerComponent implements OnInit {
   img: string;
   title: string;
   subTitle: string;

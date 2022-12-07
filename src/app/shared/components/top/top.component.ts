@@ -14,6 +14,7 @@ import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 export class TopComponent implements OnInit {
   constructor(
     private crudService: CrudService,
+    private authService: IonicAuthService,
     private cdr: ChangeDetectorRef,
     private router: Router
   ) {
@@ -22,24 +23,54 @@ export class TopComponent implements OnInit {
         event instanceof NavigationStart &&
         (event.url === '/tabs/tab2' || event.url === '/tabs/tab3')
       ) {
-        this.getMeditationHours();
+        this.getMeditationCount();
+        this.getStandHours();
       }
     });
   }
 
-  count: Observable<number>;
+  meditationCount: number;
+  standCount: number;
+
+  meditationIsLoading = false;
+  standIsLoading = false;
 
   ngOnInit() {
-    this.getMeditationHours();
+    this.getMeditationCount();
+    this.getStandHours();
   }
 
-  getMeditationHours() {
-    this.crudService.getCountValue().then(
+  getMeditationCount() {
+    this.meditationIsLoading = true;
+    this.crudService.getCountValue('meditation', this.authService.uuid).then(
       (res: Observable<number>) => {
-        this.count = res;
+        res.subscribe((count) => {
+          this.meditationCount = count;
+          this.meditationIsLoading = false;
+        });
         this.cdr.markForCheck();
       },
-      (err) => console.log(err)
+      (err) => {
+        this.meditationIsLoading = false;
+        console.log(err);
+      }
+    );
+  }
+
+  getStandHours() {
+    this.standIsLoading = true;
+    this.crudService.getCountValue('stand', this.authService.uuid).then(
+      (res: Observable<number>) => {
+        res.subscribe((count) => {
+          this.standCount = count;
+          this.standIsLoading = false;
+        });
+        this.cdr.markForCheck();
+      },
+      (err) => {
+        this.standIsLoading = false;
+        console.log(err);
+      }
     );
   }
 }

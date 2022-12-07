@@ -3,14 +3,20 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { map } from 'rxjs/operators';
 import firebase from 'firebase/compat';
 import User = firebase.User;
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import UserCredential = firebase.auth.UserCredential;
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IonicAuthService {
-  constructor(private angularFireAuth: AngularFireAuth) {}
+  uuid = '';
+
+  constructor(
+    private angularFireAuth: AngularFireAuth,
+    private storage: Storage
+  ) {}
 
   createUser(value) {
     return new Promise<any>((resolve, reject) => {
@@ -29,6 +35,8 @@ export class IonicAuthService {
         .signInWithEmailAndPassword(value.email, value.password)
         .then(
           (res: UserCredential) => {
+            this.uuid = res.user.uid;
+            this.storage.set('uid', res.user.uid);
             resolve(res);
           },
           (err) => reject(err)
@@ -42,7 +50,7 @@ export class IonicAuthService {
         this.angularFireAuth
           .signOut()
           .then(() => {
-            console.log('Sign out');
+            this.storage.clear();
             resolve();
           })
           .catch(() => {
@@ -53,7 +61,12 @@ export class IonicAuthService {
   }
 
   isUserLoggedIn(): Observable<boolean> {
-    return this.angularFireAuth.user.pipe(map((user: User) => !Boolean(user)));
+    return this.angularFireAuth.user.pipe(
+      map((user: User) => {
+        console.log(Boolean(user));
+        return Boolean(user);
+      })
+    );
   }
 
   userInfo() {
